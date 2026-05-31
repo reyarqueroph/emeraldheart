@@ -1,0 +1,214 @@
+/* ============================================
+   eHeart — Immersive PDF Viewer
+   ============================================ */
+
+.pdf-viewer-wrap {
+    background: #e8e8e8;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 560px;
+}
+
+/* Minimal toolbar */
+.pdf-toolbar {
+    background: var(--pru-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.pdf-toolbar-left,
+.pdf-toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pdf-toolbar-center {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 500;
+}
+
+.pdf-toolbar-center span {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+}
+
+.pdf-tool-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    color: rgba(255, 255, 255, 0.75);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.18s;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.pdf-tool-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.pdf-tool-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.pdf-tool-btn.accent {
+    background: var(--pru-red);
+    color: white;
+}
+
+.pdf-tool-btn.accent:hover {
+    background: var(--pru-red-dark);
+}
+
+.pdf-zoom-label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    min-width: 38px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Scrollable page area */
+.pdf-pages-area {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: auto;
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background: #d0d0d0;
+    min-height: 480px;
+    max-height: 580px; /* overridden in dashboard context */
+    scroll-behavior: smooth;
+}
+
+/* Individual page wrapper */
+.pdf-page-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.pdf-page-wrap canvas {
+    display: block;
+    background: #ffffff;
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.18),
+        0 8px 32px rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+    max-width: 100%;
+}
+
+/* Loading state */
+.pdf-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 60px 24px;
+    color: var(--pru-muted);
+    width: 100%;
+}
+
+.pdf-loading .pdf-spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid rgba(213, 0, 50, 0.15);
+    border-top-color: var(--pru-red);
+    border-radius: 50%;
+    animation: pdfSpin 0.7s linear infinite;
+}
+
+@keyframes pdfSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.pdf-loading p {
+    font-size: 13px;
+    margin: 0;
+    color: var(--pru-muted);
+}
+
+/* Error state */
+.pdf-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 60px 24px;
+    color: var(--pru-muted);
+    width: 100%;
+    text-align: center;
+}
+
+.pdf-error i {
+    font-size: 36px;
+    color: var(--pru-danger);
+    opacity: 0.6;
+}
+
+.pdf-error p {
+    font-size: 13px;
+    margin: 0;
+}
+
+/* Page number badge on each page */
+.pdf-page-num {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.35);
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .pdf-pages-area {
+        padding: 16px 8px;
+        gap: 14px;
+        max-height: 420px;
+    }
+
+    .pdf-toolbar {
+        padding: 8px 12px;
+    }
+
+    .pdf-zoom-label {
+        display: none;
+    }
+
+    .pdf-toolbar-center {
+        font-size: 11px;
+    }
+}
